@@ -36,7 +36,6 @@
 --computedvarattrs prev-line # wrapAttributes
 --storedvarattrs prev-line # wrapAttributes
 --complexattrs prev-line # wrapAttributes
---nilinit insert # redundantNilInit
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
 --maxwidth 130 # wrap
@@ -107,7 +106,6 @@
 --rules redundantTypedThrows
 --rules consistentSwitchCaseSpacing
 --rules blankLineAfterSwitchCase
---rules redundantNilInit
 
 # Not released yet, will be used after release
 # --rules blankLineAfterMultilineSwitchCase
