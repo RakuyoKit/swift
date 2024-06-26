@@ -6,27 +6,24 @@
 --self remove # redundantSelf
 --importgrouping testable-bottom # sortedImports
 --commas always # trailingCommas
---trimwhitespace always # trailingSpace
---indent 2 #indent
+--trimwhitespace nonblank-lines # trailingSpace
+--indent 4 #indent
 --ifdef no-indent #indent
 --indentstrings true #indent
 --wraparguments before-first # wrapArguments
 --wrapparameters before-first # wrapArguments
 --wrapcollections before-first # wrapArguments
 --wrapconditions before-first # wrapArguments
---wrapreturntype if-multiline #wrapArguments
---wrapeffects if-multiline #wrapArguments
---closingparen same-line # wrapArguments
+--wrapreturntype preserve # wrapArguments
+--wrapeffects preserve # wrapArguments
+--closingparen balanced # wrapArguments
 --wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
 --computedvarattrs prev-line # wrapAttributes
---storedvarattrs same-line # wrapAttributes
+--storedvarattrs prev-line # wrapAttributes
 --complexattrs prev-line # wrapAttributes
 --typeattributes prev-line # wrapAttributes
 --wrapternary before-operators # wrap
---structthreshold 20 # organizeDeclarations
---enumthreshold 20 # organizeDeclarations
---organizetypes class,struct,enum,extension,actor # organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
 --redundanttype inferred # redundantType, propertyType
@@ -52,7 +49,6 @@
 --rules hoistPatternLet
 --rules indent
 --rules markTypes
---rules organizeDeclarations
 --rules redundantParens
 --rules redundantReturn
 --rules redundantSelf
@@ -95,7 +91,6 @@
 --rules andOperator
 --rules opaqueGenericParameters
 --rules genericExtensions
---rules trailingClosures
 --rules elseOnSameLine
 --rules sortTypealiases
 --rules preferForLoop
@@ -104,5 +99,13 @@
 --rules blankLineAfterSwitchCase
 --rules consistentSwitchCaseSpacing
 --rules semicolons
---rules propertyType
 --rules blankLinesBetweenChainedFunctions
+--rules isEmpty
+--rules acronyms
+--rules modifierOrder
+--rules spaceAroundOperators
+--rules assertionFailures
+--rules blankLinesAroundMark
+--rules redundantTypedThrows
+--rules consistentSwitchCaseSpacing
+--rules blankLineAfterSwitchCase
