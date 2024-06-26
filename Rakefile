@@ -3,16 +3,14 @@ require 'net/http'
 require 'json'
 require 'tempfile'
 
-namespace :lint do
+namespace :swift do
   desc 'Lints swift files'
-  task :swift do
+  task :lint do
     sh 'swift package --allow-writing-to-package-directory format --lint'
   end
-end
 
-namespace :format do
   desc 'Formats swift files'
-  task :swift do
+  task :format do
     sh 'swift package --allow-writing-to-package-directory format'
   end
 end

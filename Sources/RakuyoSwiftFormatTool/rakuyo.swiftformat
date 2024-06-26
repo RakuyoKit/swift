@@ -26,7 +26,7 @@
 --wrapternary before-operators # wrap
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
---redundanttype inferred # redundantType, propertyType
+--redundanttype inferred # redundantType
 --typeblanklines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --emptybraces spaced # emptyBraces
 --someAny disabled # opaqueGenericParameters
@@ -73,7 +73,6 @@
 --rules redundantVoidReturnType
 --rules redundantOptionalBinding
 --rules redundantInternal
---rules redundantProperty
 --rules unusedArguments
 --rules spaceInsideBrackets
 --rules spaceInsideBraces
