@@ -273,9 +273,9 @@ extension RakuyoSwiftFormatToolTest {
 
 /// Mock implementations of the commands ran by `RakuyoSwiftFormatTool`
 struct MockCommands {
-    var swiftFormat: (() -> Int32)?
-    var swiftLint: (() -> Int32)?
-    var swiftLintAutocorrect: (() -> Int32)?
+    var swiftFormat: (() -> Int32)? = nil
+    var swiftLint: (() -> Int32)? = nil
+    var swiftLintAutocorrect: (() -> Int32)? = nil
     
     func mockRunCommand(_ command: Command) -> Int32 {
         if command.launchPath.lowercased().contains("swiftformat") {
