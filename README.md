@@ -1,6 +1,8 @@
-# Airbnb Swift Style Guide
+# Rakuyo Swift Style Guide
 
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Fswift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/airbnb/swift)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FRakuyoKit%2Fswift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/RakuyoKit/swift) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FRakuyoKit%2Fswift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/RakuyoKit/swift)
+
+> This style guide was forked from [Airbnb](https://github.com/airbnb/swift), modified and extended, and the namespace was renamed `Rakuyo`.
 
 ## Goals
 
@@ -20,8 +22,14 @@ Note that brevity is not a primary goal. Code should be made more concise only i
 * These rules should not fight Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
 * We strive to make every rule lintable:
   * If a rule changes the format of the code, it needs to be able to be reformatted automatically (either using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) or [SwiftLint](https://github.com/realm/SwiftLint) autocorrect).
-  * For rules that don't directly change the format of the code, we should have a lint rule that throws a warning.
+  * For rules that don't directly change the format of the code, we should have a lint rule that throws a warning or error.
   * Exceptions to these rules should be rare and heavily justified.
+
+## asdf/mise plugin
+
+[RakuyoKit/asdf-swift-style-guide](https://github.com/RakuyoKit/asdf-swift-style-guide) is an [asdf](https://github.com/asdf-vm/asdf) plugin (it also supports [mise](https://github.com/jdx/mise)).
+
+You can download lint, format and other configuration files through this plug-in, and then freely execute related commands in the way you like.
 
 ## Swift Package Manager command plugin
 
@@ -29,7 +37,7 @@ This repo includes a Swift Package Manager command plugin that you can use to au
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/airbnb/swift", from: "1.0.0"),
+  .package(url: "https://github.com/RakuyoKit/swift", from: "1.2.1"),
 ]
 ```
 
@@ -58,7 +66,7 @@ $ swift package format --exclude Tests
 
 # Alternatively you can explicitly list the set of paths and/or SPM targets:
 $ swift package format --paths Sources Tests Package.swift
-$ swift package format --targets AirbnbSwiftFormatTool
+$ swift package format --targets RakuyoSwiftFormatTool
 
 # The plugin infers your package's minimum Swift version from the `swift-tools-version`
 # in your `Package.swift`, but you can provide a custom value with `--swift-version`:
@@ -100,7 +108,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 2 spaces to indent lines.** [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#indent)
+* <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Use 4 spaces to indent lines.** [![SwiftFormat: indent](https://img.shields.io/badge/SwiftFormat-indent-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#indent)
 
 * <a id='trailing-whitespace'></a>(<a href='#trailing-whitespace'>link</a>) **Trim trailing whitespace in all lines.** [![SwiftFormat: trailingSpace](https://img.shields.io/badge/SwiftFormat-trailingSpace-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingSpace)
 
@@ -792,12 +800,21 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='simple-stored-property-attributes-on-same-line'></a>(<a href='#simple-stored-property-attributes-on-same-line'>link</a>) **Place simple attributes for stored properties on the same line as the rest of the declaration**. Complex attributes with named arguments, or more than one unnamed argument, should be placed on the previous line. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
+* <a id='simple-stored-property-attributes-on-same-line'></a>(<a href='#simple-stored-property-attributes-on-same-line'>link</a>) **Place attributes for properties on the previous line.**. whether it's complicated or not. [![SwiftFormat: wrapAttributes](https://img.shields.io/badge/SwiftFormat-wrapAttributes-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapAttributes)
 
   <details>
 
   ```swift
-  // WRONG. These simple property wrappers should be written on the same line as the declaration. 
+  struct SpaceshipDashboardView {
+
+    @State private var warpDriveEnabled: Bool
+
+    @ObservedObject private var lifeSupportService: LifeSupportService
+
+    @Environment(\.controlPanelStyle) private var controlPanelStyle
+  }
+
+  // RIGHT
   struct SpaceshipDashboardView {
 
     @State
@@ -808,23 +825,10 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     @Environment(\.controlPanelStyle) 
     private var controlPanelStyle
-
-  }
-
-  // RIGHT
-  struct SpaceshipDashboardView {
-
-    @State private var warpDriveEnabled: Bool
-
-    @ObservedObject private var lifeSupportService: LifeSupportService
-
-    @Environment(\.controlPanelStyle) private var controlPanelStyle
-
   }
   ```
 
   ```swift
-  // WRONG. These complex attached macros should be written on the previous line.
   struct SolarSystemView {
 
     @Query(sort: \.distance) var allPlanets: [Planet]
@@ -968,7 +972,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ]
   ```
 
-* <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/airbnb/swift#column-width) type aliases of protocol compositions should wrap before the `=` and before each individual `&`. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+* <a id='long-typealias'></a>(<a href='#long-typealias'>link</a>) [Long](https://github.com/RakuyoKit/swift#column-width) type aliases of protocol compositions should wrap before the `=` and before each individual `&`. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
 
@@ -1108,12 +1112,12 @@ _You can enable the following settings in Xcode by running [this script](resourc
   }
   ```
 
-* <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [2 spaces](https://github.com/airbnb/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+* <a id='multi-line-conditions'></a>(<a href='#multi-line-conditions'>link</a>) **Multi-line conditional statements should break after the leading keyword.** Indent each individual statement by [4 spaces](https://github.com/RakuyoKit/swift#spaces-over-tabs). [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
 
   #### Why?
-  Breaking after the leading keyword resets indentation to the standard [2-space grid](https://github.com/airbnb/swift#spaces-over-tabs),
+  Breaking after the leading keyword resets indentation to the standard [4-space grid](https://github.com/RakuyoKit/swift#spaces-over-tabs),
   which helps avoid fighting Xcode's <kbd>^</kbd> + <kbd>I</kbd> indentation behavior.
 
   ```swift
@@ -1641,8 +1645,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
   class Planet {
     func terraform(
       atmosphereOptions: AtmosphereOptions = .default,
-      oceanOptions: OceanOptions = .default)
-    {
+      oceanOptions: OceanOptions = .default
+    ) {
       generateAtmosphere(atmosphereOptions)
       generateOceans(oceanOptions)
     }
@@ -2004,7 +2008,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/airbnb/swift#column-width) function declarations with line breaks before each argument label, and before the return signature or any effects (`async`, `throws`).** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#braces)
+* <a id='long-function-declaration'></a>(<a href='#long-function-declaration'>link</a>) **Separate [long](https://github.com/Rakuyo/swift#column-width) function declarations with line breaks before each argument label, and before the return signature or any effects (`async`, `throws`).** Put the open curly brace on the next line so the first executable line doesn't look like it's another parameter. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments) [![SwiftFormat: braces](https://img.shields.io/badge/SwiftFormat-braces-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#braces)
 
   <details>
 
@@ -2060,9 +2064,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
       at location: Point,
       count: Int,
       color: StarColor,
-      withAverageDistance averageDistance: Float)
-      -> String
-    {
+      withAverageDistance averageDistance: Float
+    ) -> String {
       populateUniverse()
     }
 
@@ -2071,9 +2074,8 @@ _You can enable the following settings in Xcode by running [this script](resourc
       at location: Point,
       count: Int,
       color: StarColor,
-      withAverageDistance averageDistance: Float)
-      async throws -> String
-    {
+      withAverageDistance averageDistance: Float
+    ) async throws -> String {
       populateUniverse()
     }
   }
@@ -2081,7 +2083,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
+* <a id='long-function-invocation'></a>(<a href='#long-function-invocation'>link</a>) **[Long](https://github.com/Rakuyo/swift#column-width) function invocations should also break on each argument.** Put the closing parenthesis on the last line of the invocation. [![SwiftFormat: wrapArguments](https://img.shields.io/badge/SwiftFormat-wrapArguments-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrapArguments)
 
   <details>
 
@@ -2333,28 +2335,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='anonymous-trailing-closures'></a>(<a href='#anonymous-trailing-closures'>link</a>) **Prefer trailing closure syntax for closure arguments with no parameter name.** [![SwiftFormat: trailingClosures](https://img.shields.io/badge/SwiftFormat-trailingClosures-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingClosures)
-
-  <details>
-
-  ```swift
-  // WRONG
-  planets.map({ $0.name })
-
-  // RIGHT
-  planets.map { $0.name }
-
-  // ALSO RIGHT, since this closure has a parameter name
-  planets.first(where: { $0.isGasGiant })
-
-  // ALSO FINE. Trailing closure syntax is still permitted for closures
-  // with parameter names. However, consider using non-trailing syntax
-  // in cases where the parameter name is semantically meaningful.
-  planets.first { $0.isGasGiant }
-  ```
-
-  </details>
-
 * <a id='unowned-captures'></a>(<a href='#unowned-captures'>link</a>) **Avoid using `unowned` captures.** Instead prefer safer alternatives like `weak` captures, or capturing variables directly. [![SwiftLint: unowned_variable_capture](https://img.shields.io/badge/SwiftLint-unowned__variable__capture-007A87.svg)](https://realm.github.io/SwiftLint/unowned_variable_capture.html)
 
   <details>
@@ -2452,7 +2432,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='long-ternary-operator-expressions'></a>(<a href='#long-ternary-operator-expressions'>link</a>) **[Long](https://github.com/airbnb/swift#column-width) ternary operator expressions should wrap before the `?` and before the `:`**, putting each conditional branch on a separate line. [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrap)
+* <a id='long-ternary-operator-expressions'></a>(<a href='#long-ternary-operator-expressions'>link</a>) **[Long](https://github.com/Rakuyo/swift#column-width) ternary operator expressions should wrap before the `?` and before the `:`**, putting each conditional branch on a separate line. [![SwiftFormat: wrap](https://img.shields.io/badge/SwiftFormat-wrap-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#wrap)
 
   <details>
 
@@ -3279,7 +3259,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   </details>
 
-* <a id='no-direct-standard-out-logs'></a>(<a href='#no-direct-standard-out-logs'>link</a>) **Prefer dedicated logging systems like [`os_log`](https://developer.apple.com/documentation/os/logging) or [`swift-log`](https://github.com/apple/swift-log) over writing directly to standard out using `print(…)`, `debugPrint(…)`, or `dump(…)`.**
+* <a id='no-direct-standard-out-logs'></a>(<a href='#no-direct-standard-out-logs'>link</a>) **Prefer dedicated logging systems like [`os_log`](https://developer.apple.com/documentation/os/logging) or [`swift-log`](https://github.com/apple/swift-log) over writing directly to standard out using `print(…)`, `debugPrint(…)`, or `dump(…)`.** ![SwiftLint: no_direct_standard_out_logs](https://img.shields.io/badge/SwiftLint-no_direct_standard_out_logs-007A87.svg)
 
   <details>
 
@@ -3601,47 +3581,11 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
     </details>
 
-* <a id='redundant-property'></a>(<a href='#redundant-property'>link</a>) **Avoid defining properties that are then returned immediately.** Instead, return the value directly. [![SwiftFormat: redundantProperty](https://img.shields.io/badge/SwiftFormat-redundantProperty-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantProperty)
-
-    <details>
-
-    ### Why?
-
-    Property declarations that are immediately returned are typically redundant and unnecessary. Sometimes these are unintentionally created as the byproduct of refactoring. Cleaning them up automatically simplifies the code. In some cases this also results in the `return` keyword itself being unnecessary, further simplifying the code.
-
-    ```swift
-    // WRONG
-    var spaceship: Spaceship {
-      let spaceship = spaceshipBuilder.build(warpDrive: warpDriveBuilder.build())
-      return spaceship
-    }
-
-    // RIGHT
-    var spaceship: Spaceship {
-      spaceshipBuilder.build(warpDrive: warpDriveBuilder.build())
-    }
-
-    // WRONG
-    var spaceship: Spaceship {
-      let warpDrive = warpDriveBuilder.build()
-      let spaceship = spaceshipBuilder.build(warpDrive: warpDrive)
-      return spaceship
-    }
-
-    // RIGHT
-    var spaceship: Spaceship {
-      let warpDrive = warpDriveBuilder.build()
-      return spaceshipBuilder.build(warpDrive: warpDrive)
-    }
-    ```
-
-    </details>
-
 **[⬆ back to top](#table-of-contents)**
 
 ## File Organization
 
-* <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file. Place all imports at the top of the file below the header comments. Do not add additional line breaks between import statements. Add a single empty line before the first import and after the last import.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortedImports) [![SwiftFormat: duplicateImports](https://img.shields.io/badge/SwiftFormat-duplicateImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#duplicateImports)
+* <a id='alphabetize-and-deduplicate-imports'></a>(<a href='#alphabetize-and-deduplicate-imports'>link</a>) **Alphabetize and deduplicate module imports within a file. Place all imports at the top of the file below the header comments. Do not add additional line breaks between import statements. Add a single empty line before the first import and after the last import.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortImports) [![SwiftFormat: duplicateImports](https://img.shields.io/badge/SwiftFormat-duplicateImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#duplicateImports)
 
   <details>
 
@@ -3652,7 +3596,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2024 Rakuyo. All rights reserved.
   //
   import DLSPrimitives
   import Constellation
@@ -3663,7 +3607,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2024 Rakuyo. All rights reserved.
   //
 
   import Constellation
@@ -3681,7 +3625,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```swift
   // WRONG
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2024 Rakuyo. All rights reserved.
   //
 
   import DLSPrimitives
@@ -3692,7 +3636,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
   // RIGHT
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2024 Rakuyo. All rights reserved.
   //
 
   import DLSPrimitives
@@ -3919,7 +3863,7 @@ _You can enable the following settings in Xcode by running [this script](resourc
 
 ## Objective-C Interoperability
 
-* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`.
+* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Prefer pure Swift classes over subclasses of NSObject.** If your code needs to be used by some Objective-C code, wrap it to expose the desired functionality. Use `@objc` on individual methods and variables as necessary rather than exposing all API on a class to Objective-C via `@objcMembers`. ![SwiftLint: no_objcMembers](https://img.shields.io/badge/SwiftLint-no_objcMembers-007A87.svg)
 
   <details>
 
@@ -3943,12 +3887,6 @@ _You can enable the following settings in Xcode by running [this script](resourc
   ```
 
   </details>
-
-**[⬆ back to top](#table-of-contents)**
-
-## Contributors
-
-  - [View Contributors](https://github.com/airbnb/swift/graphs/contributors)
 
 **[⬆ back to top](#table-of-contents)**
 
