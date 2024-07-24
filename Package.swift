@@ -8,7 +8,7 @@ let package = Package(
         .plugin(name: "FormatSwift", targets: ["FormatSwift"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.4.0"),
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.5.0"),
     ],
     targets: [
         .plugin(
@@ -47,8 +47,8 @@ let package = Package(
 
         .binaryTarget(
             name: "SwiftFormat",
-            url: "https://github.com/nicklockwood/SwiftFormat/releases/download/0.54.1/SwiftFormat.artifactbundle.zip",
-            checksum: "ceabca9e43b3d94f8005a48744e6a1ca4006daa43ff8349808469a584ed88ef5"
+            url: "https://github.com/nicklockwood/SwiftFormat/releases/download/0.54.2/SwiftFormat.artifactbundle.zip",
+            checksum: "eabe5aacab8a8359820a158f7af0aa222669983662e64bf7430767cd4d326e47"
         ),
 
         .binaryTarget(
