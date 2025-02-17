@@ -26,7 +26,7 @@
 --wrapternary before-operators # wrap
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
---redundanttype inferred # redundantType
+--propertytypes inferred # redundantType, propertyTypes
 --typeblanklines preserve # blankLinesAtStartOfScope, blankLinesAtEndOfScope
 --emptybraces spaced # emptyBraces
 --someAny disabled # opaqueGenericParameters
@@ -45,6 +45,7 @@
 --rules anyObjectProtocol
 --rules blankLinesBetweenScopes
 --rules consecutiveSpaces
+--rules consecutiveBlankLines
 --rules duplicateImports
 --rules extensionAccessControl
 --rules hoistPatternLet
@@ -63,6 +64,7 @@
 --rules strongifiedSelf
 --rules trailingCommas
 --rules trailingSpace
+--rules linebreakAtEndOfFile
 --rules typeSugar
 --rules wrap
 --rules wrapMultilineStatementBraces
@@ -80,9 +82,11 @@
 --rules spaceAroundBraces
 --rules spaceInsideParens
 --rules spaceAroundParens
+--rules spaceAroundOperators
 --rules enumNamespaces
 --rules blockComments
 --rules docComments
+--rules docCommentsBeforeModifiers
 --rules spaceAroundComments
 --rules spaceInsideComments
 --rules blankLinesAtStartOfScope
@@ -96,6 +100,7 @@
 --rules preferForLoop
 --rules conditionalAssignment
 --rules wrapMultilineConditionalAssignment
+--rules void
 --rules blankLineAfterSwitchCase
 --rules consistentSwitchCaseSpacing
 --rules semicolons
@@ -103,10 +108,12 @@
 --rules isEmpty
 --rules acronyms
 --rules modifierOrder
---rules spaceAroundOperators
 --rules assertionFailures
 --rules blankLinesAroundMark
 --rules redundantTypedThrows
 --rules consistentSwitchCaseSpacing
 --rules blankLineAfterSwitchCase
 --rules redundantNilInit
+--rules propertyTypes
+--rules blankLinesBetweenChainedFunctions
+--rules unusedPrivateDeclarations

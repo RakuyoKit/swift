@@ -24,7 +24,7 @@ let package = Package(
             ),
             dependencies: [
                 "RakuyoSwiftFormatTool",
-                "SwiftFormat",
+                "swiftformat",
                 "SwiftLintBinary",
             ]
         ),
@@ -46,9 +46,9 @@ let package = Package(
         ),
 
         .binaryTarget(
-            name: "SwiftFormat",
-            url: "https://github.com/nicklockwood/SwiftFormat/releases/download/0.54.2/SwiftFormat.artifactbundle.zip",
-            checksum: "eabe5aacab8a8359820a158f7af0aa222669983662e64bf7430767cd4d326e47"
+            name: "swiftformat",
+            url: "https://github.com/nicklockwood/SwiftFormat/releases/download/0.55.0/SwiftFormat.artifactbundle.zip",
+            checksum: "83bf5673561eff20d407d6642e3572dfbd8e6c129eab66e950f361af424b0b0f"
         ),
 
         .binaryTarget(
