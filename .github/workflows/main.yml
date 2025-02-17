@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  test-package-plugin-macos-13:
+  test-package-plugin:
     name: Test Package Plugin
     runs-on: macos-13
     strategy:
