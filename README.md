@@ -37,7 +37,7 @@ This repo includes a Swift Package Manager command plugin that you can use to au
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/RakuyoKit/swift", from: "1.3.1"),
+  .package(url: "https://github.com/RakuyoKit/swift", from: "1.4.0"),
 ]
 ```
 
