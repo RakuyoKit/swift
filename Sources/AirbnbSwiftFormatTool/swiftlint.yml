@@ -5,6 +5,7 @@ excluded:
   - Carthage
   - Pods
   - .build
+  - Tuist/.build
 
 only_rules:
   - custom_rules
